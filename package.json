@@ -1,0 +1,28 @@
+{
+  "name": "node-office",
+  "version": "0.0.1",
+  "description": "NodeJS office converter using LibreOffice or OpenOffice.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damian66/node-office.git"
+  },
+  "keywords": [
+    "office",
+    "libreoffice",
+    "openoffice",
+    "microsoft",
+    "node",
+    "file",
+    "convert"
+  ],
+  "author": "Damian Bartosik <hello@damianbartosik.com> (https://damianbartosik.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/damian66/node-office/issues"
+  },
+  "homepage": "https://github.com/damian66/node-office#readme"
+}
