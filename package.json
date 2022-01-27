@@ -1,6 +1,6 @@
 {
   "name": "node-office",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha2",
   "description": "NodeJS office converter using LibreOffice or OpenOffice.",
   "main": "dist/index.js",
   "scripts": {

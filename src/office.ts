@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import debugFactory from 'debug';
 import path from 'path';
+import fs from 'fs';
 
 import { spawn, ChildProcess } from 'child_process';
 import { DEFAULT_OPTIONS } from './constants';
@@ -13,14 +14,18 @@ import {
 const debug = debugFactory('node-unoconv:command');
 
 const officeConvert = (options: ConvertOptions): ChildProcess => {
+  const { input = '' } = options;
+
+  const inputPath = input.substring(0, input.lastIndexOf('/'));
   const stdout: Uint8Array[] = [];
   const stderr: Uint8Array[] = [];
 
+  const returnToBuffer = !options.outdir;
+
   const {
     callback = (() => null) as Callback,
-    input,
     type = 'pdf',
-    outdir = path.join(__dirname, '..', 'test'),
+    outdir = inputPath,
   } = options;
 
   if (options.debug) {
@@ -30,10 +35,17 @@ const officeConvert = (options: ConvertOptions): ChildProcess => {
   const args = [
     '--convert-to', type,
     input,
-    '--outdir', outdir,
     '--accept=socket,host=127.0.0.1,port=2001,tcpNoDelay=1;urp;StarOffice.ComponentContext',
     '--headless',
   ] as string[];
+
+  if (outdir) {
+    args.push('--outdir', outdir);
+  }
+
+  if (returnToBuffer) {
+    args.push('-p');
+  }
 
   debug(`Running command: soffice ${args.join(' ')}`);
 
@@ -47,8 +59,14 @@ const officeConvert = (options: ConvertOptions): ChildProcess => {
     stderr.push(data);
   });
 
-  childProcess.on('close', (code: string) => {
+  childProcess.on('close', async (code: string) => {
     debug('node-office finished with code: %s', code);
+
+    if (returnToBuffer) {
+      const output = input.replace(path.extname(input), `.${type}`);
+      await new Promise((resolve) => fs.unlink(output, () => resolve(true)));
+    }
+
     if (stderr.length) {
       const error = new Error(Buffer.concat(stderr).toString('utf8'));
       debug('%o', error);

@@ -87,4 +87,32 @@ describe('Convert', () => {
 
     convert(options);
   });
+
+  it.only('Converts a PDF to buffer', async () => {
+    const randomString = Math.floor(Math.random() * 10000).toString();
+    const dir = path.join(__dirname, '..', '..', 'test');
+    const source = path.join(dir, 'test.pdf');
+    const input = path.join(dir, `test-${randomString}.pdf`);
+    const output = path.join(dir, `test-${randomString}.jpg`);
+
+    fs.copyFileSync(source, input);
+
+    const options = {
+      input,
+      type: 'jpg',
+      debug: true,
+    };
+
+    const buffer = await convert(options);
+
+    expect(buffer.length).toBeGreaterThan(0);
+    expect(Buffer.isBuffer(buffer)).toBeTruthy();
+
+    const outputFileExists = await new Promise((resolve) => fs.exists(output, (result) => resolve(result)));
+    expect(outputFileExists).toBeFalsy();
+
+    await Promise.all([
+      new Promise((resolve) => fs.unlink(input, () => resolve(true))),
+    ]);
+  });
 });

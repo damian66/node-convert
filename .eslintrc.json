@@ -16,6 +16,7 @@
     ],
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "import/extensions": 0
+    "import/extensions": 0,
+    "max-len": ["error", { "code": 140 }]
   }
 }
