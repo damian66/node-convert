@@ -6,5 +6,5 @@ export const DEFAULT_OPTIONS: Options = {
 };
 
 export default {
-  COMMAND_ARGUMENTS,
+  DEFAULT_OPTIONS,
 };
