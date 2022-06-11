@@ -1,9 +1,10 @@
 # node-office
-NodeJS office converter using LibreOffice or OpenOffice.
+NodeJS file converter using LibreOffice or OpenOffice software under the hood.
 
-- Convert PDF, Office and many other files types
-- Easily generate file thumbnails
+- Convert PDF, Office and many other file types ([supported file formats](https://en.wikipedia.org/wiki/LibreOffice#Supported_file_formats))
+- Generate file thumbnails
 - Callback and promise support
+- Output to file or buffer
 
 ## Installation
 ```
@@ -30,6 +31,11 @@ function callback() {
 }
 
 office.convert('./test.doc', './test.pdf', callback);
+```
+
+#### Output to buffer
+```js
+const buffer = await office.convert('./test.doc');
 ```
 
 ### Generate thumbnails

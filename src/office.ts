@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import debugFactory from 'debug';
 import path from 'path';
 import fs from 'fs';
 
 import { spawn, ChildProcess } from 'child_process';
-import { DEFAULT_OPTIONS } from './constants';
 import {
-  Callback, OptionValues,
-  Options, ReturnOutput,
+  Callback, Options, ReturnOutput,
   ConvertOptions,
 } from './types.d';
 
@@ -64,7 +61,7 @@ const officeConvert = (options: ConvertOptions): ChildProcess => {
 
     if (returnToBuffer) {
       const output = input.replace(path.extname(input), `.${type}`);
-      await new Promise((resolve) => fs.unlink(output, () => resolve(true)));
+      await new Promise((resolve) => { fs.unlink(output, () => resolve(true)); });
     }
 
     if (stderr.length) {
@@ -103,7 +100,7 @@ const convert = (options: Options): ReturnOutput => {
         callback,
       };
 
-      return officeConvert(runOptions);
+      officeConvert(runOptions);
     });
   }
 

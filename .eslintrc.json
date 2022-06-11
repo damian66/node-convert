@@ -1,7 +1,7 @@
 {
   "extends": [
     "eslint:recommended",
-    "airbnb",
+    "airbnb-base",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/typescript"
   ],

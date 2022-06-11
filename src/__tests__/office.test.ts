@@ -28,8 +28,8 @@ describe('Convert', () => {
     expect(fileStats.size).toBeGreaterThan(0);
 
     await Promise.all([
-      new Promise((resolve) => fs.unlink(input, () => resolve(true))),
-      new Promise((resolve) => fs.unlink(output, () => resolve(true))),
+      new Promise((resolve) => { fs.unlink(input, () => resolve(true)); }),
+      new Promise((resolve) => { fs.unlink(output, () => resolve(true)); }),
     ]);
   });
 
@@ -54,8 +54,8 @@ describe('Convert', () => {
     expect(fileStats.size).toBeGreaterThan(0);
 
     await Promise.all([
-      new Promise((resolve) => fs.unlink(input, () => resolve(true))),
-      new Promise((resolve) => fs.unlink(output, () => resolve(true))),
+      new Promise((resolve) => { fs.unlink(input, () => resolve(true)); }),
+      new Promise((resolve) => { fs.unlink(output, () => resolve(true)); }),
     ]);
   });
 
@@ -88,7 +88,7 @@ describe('Convert', () => {
     convert(options);
   });
 
-  it.only('Converts a PDF to buffer', async () => {
+  it('Converts a PDF to buffer', async () => {
     const randomString = Math.floor(Math.random() * 10000).toString();
     const dir = path.join(__dirname, '..', '..', 'test');
     const source = path.join(dir, 'test.pdf');
@@ -108,11 +108,11 @@ describe('Convert', () => {
     expect(buffer.length).toBeGreaterThan(0);
     expect(Buffer.isBuffer(buffer)).toBeTruthy();
 
-    const outputFileExists = await new Promise((resolve) => fs.exists(output, (result) => resolve(result)));
+    const outputFileExists = await new Promise((resolve) => { fs.exists(output, (result) => resolve(result)); });
     expect(outputFileExists).toBeFalsy();
 
     await Promise.all([
-      new Promise((resolve) => fs.unlink(input, () => resolve(true))),
+      new Promise((resolve) => { fs.unlink(input, () => resolve(true)); }),
     ]);
   });
 });
