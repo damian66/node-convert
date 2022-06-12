@@ -1,7 +1,7 @@
 import convert from '../convert';
-import office from '../office';
+import office from '../soffice';
 
-jest.mock('../office.ts');
+jest.mock('../soffice.ts');
 
 describe('Convert', () => {
   it('calls soffice function', async () => {

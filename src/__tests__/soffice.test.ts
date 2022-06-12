@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import convert from '../office';
+import convert from '../soffice';
 
 jest.setTimeout(30000);
 

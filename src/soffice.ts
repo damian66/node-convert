@@ -1,16 +1,16 @@
+import { spawn, ChildProcess } from 'child_process';
 import debugFactory from 'debug';
 import path from 'path';
 import fs from 'fs';
 
-import { spawn, ChildProcess } from 'child_process';
-import {
+import type {
   Callback, Options, ReturnOutput,
   ConvertOptions,
-} from './types.d';
+} from './types';
 
 const debug = debugFactory('node-unoconv:command');
 
-const officeConvert = (options: ConvertOptions): ChildProcess => {
+const sofficeConvert = (options: ConvertOptions): ChildProcess => {
   const { input = '' } = options;
 
   const inputPath = input.substring(0, input.lastIndexOf('/'));
@@ -26,7 +26,7 @@ const officeConvert = (options: ConvertOptions): ChildProcess => {
   } = options;
 
   if (options.debug) {
-    debugFactory.enable('node-office:*');
+    debugFactory.enable('node-convert:*');
   }
 
   const args = [
@@ -57,7 +57,7 @@ const officeConvert = (options: ConvertOptions): ChildProcess => {
   });
 
   childProcess.on('close', async (code: string) => {
-    debug('node-office finished with code: %s', code);
+    debug('soffice finished with code: %s', code);
 
     if (returnToBuffer) {
       const output = input.replace(path.extname(input), `.${type}`);
@@ -100,11 +100,11 @@ const convert = (options: Options): ReturnOutput => {
         callback,
       };
 
-      officeConvert(runOptions);
+      sofficeConvert(runOptions);
     });
   }
 
-  return officeConvert(options);
+  return sofficeConvert(options);
 };
 
 export default convert;

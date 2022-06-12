@@ -1,0 +1,9 @@
+- [ ] Convert files
+- - [ ] Convert multiple files
+- - [ ] Wildcard support
+- [ ] Error reporting
+- - [ ] Check if office package is installed or not
+- [ ] Add listener
+- [ ] Tests
+- [ ] README
+- [ ] Benchmarks

@@ -1,7 +1,7 @@
 {
-  "name": "node-office",
+  "name": "node-convert",
   "version": "0.1.1",
-  "description": "NodeJS office converter using LibreOffice or OpenOffice.",
+  "description": "NodeJS file converter and thumbnail generator.",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -13,14 +13,12 @@
     "url": "git+https://github.com/damian66/node-office.git"
   },
   "keywords": [
-    "office",
-    "libreoffice",
-    "openoffice",
-    "microsoft",
     "node",
     "file",
     "convert",
-    "thumbnail"
+    "thumbnail",
+    "typescript",
+    "office"
   ],
   "author": "Damian Bartosik <hello@damianbartosik.com> (https://damianbartosik.com)",
   "license": "MIT",
